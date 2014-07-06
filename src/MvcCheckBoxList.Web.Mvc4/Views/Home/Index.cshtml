@@ -3,6 +3,35 @@
   ViewBag.Title = "Home";
 }
 
+<script>
+    function addNewRelated(checkboxListContainerName, nameInputContainerId, apiUrl, newInputName, newInputId) {
+
+        var newItemName = $("input#" + nameInputContainerId).val();
+        if (newItemName === null || newItemName === "") { alert("Please enter the new item name."); return; }
+        $("#" + checkboxListContainerName).append(
+                "<div class='loadingImage'>Loading image here</div>");
+        $.ajax({
+            url: apiUrl, 
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                $(".loadingImage").remove();
+                $("#" + checkboxListContainerName).append(
+                        "<input id=\"" + newInputId + data.Id + "\" name=\""
+                        + newInputName + "\"  type='checkbox'  value=\""
+                        + data.Id + "\" class=\"checkbox\" checked=\"checked\" /><label for=\"" + newInputId + data.Id + "\">"
+                        + data.Name + "</label>");
+                $("input#" + nameInputContainerId).val("");
+            },
+            data: { "Name": newItemName },
+            dataType: "json",
+        })
+
+
+    }
+
+</script>
+
 @if (Model.WasPosted) {
 	<div class="notice success clearfix">
     <div class="content_left margin_top13">
@@ -66,7 +95,10 @@
                               model => model.AvailableCities,
                               city => city.Id,
                               city => city.Name,
-                              model => model.SelectedCities)
+                              model => model.SelectedCities,
+                              new HtmlListInfo(HtmlTag.vertical_columns), 
+                              new AddNewOptions() { Enable=true, ApiPostUrl="/api/cityapi/", Name="City" })
+          
       </section>
       
       <button class="pop">SUBMIT</button>

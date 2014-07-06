@@ -262,6 +262,8 @@ namespace MvcCheckBoxList.Library {
         }
       }
 
+
+      w.wrap_close += "Add New";
       // return completed check box list wrapper
       return w;
     }

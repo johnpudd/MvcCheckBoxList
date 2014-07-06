@@ -31,7 +31,8 @@ public static partial class Extensions {
      Expression<Func<TItem, TValue>> valueExpr,
      Expression<Func<TItem, TKey>> textToDisplayExpr,
      Expression<Func<TModel, IEnumerable<TItem>>> selectedValuesExpr,
-     HtmlListInfo wrapInfo) {
+     HtmlListInfo wrapInfo,
+      AddNewOptions addNewOptions) {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -44,6 +45,7 @@ public static partial class Extensions {
                                          textToDisplayExpr = textToDisplayExpr,
                                          selectedValuesExpr = selectedValuesExpr,
                                          htmlListInfo = wrapInfo,
+                                         addNewOptions = addNewOptions
                                        });
   }
   /// <summary>
@@ -69,7 +71,9 @@ public static partial class Extensions {
      Expression<Func<TItem, TValue>> valueExpr,
      Expression<Func<TItem, TKey>> textToDisplayExpr,
      Expression<Func<TItem, bool>> selectedValueExpr,
-     HtmlListInfo wrapInfo) {
+     HtmlListInfo wrapInfo,
+      AddNewOptions addNewOptions)
+  {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -82,6 +86,7 @@ public static partial class Extensions {
                                          textToDisplayExpr = textToDisplayExpr,
                                          selectedValueExpr = selectedValueExpr,
                                          htmlListInfo = wrapInfo,
+                                         addNewOptions = addNewOptions
                                        });
   }
 
@@ -112,7 +117,9 @@ public static partial class Extensions {
      Expression<Func<TItem, TKey>> textToDisplayExpr,
      Expression<Func<TModel, IEnumerable<TItem>>> selectedValuesExpr,
      HtmlListInfo wrapInfo,
-     Expression<Func<TItem, object>> htmlAttributesExpr) {
+     Expression<Func<TItem, object>> htmlAttributesExpr,
+      AddNewOptions addNewOptions)
+  {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -126,6 +133,7 @@ public static partial class Extensions {
                                          htmlAttributesExpr = htmlAttributesExpr,
                                          selectedValuesExpr = selectedValuesExpr,
                                          htmlListInfo = wrapInfo,
+                                         addNewOptions = addNewOptions
                                        });
   }
   /// <summary>
@@ -153,7 +161,9 @@ public static partial class Extensions {
      Expression<Func<TItem, TKey>> textToDisplayExpr,
      Expression<Func<TItem, bool>> selectedValueExpr,
      HtmlListInfo wrapInfo,
-     Expression<Func<TItem, object>> htmlAttributesExpr) {
+     Expression<Func<TItem, object>> htmlAttributesExpr,
+      AddNewOptions addNewOptions)
+  {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -167,6 +177,7 @@ public static partial class Extensions {
                                          htmlAttributesExpr = htmlAttributesExpr,
                                          selectedValueExpr = selectedValueExpr,
                                          htmlListInfo = wrapInfo,
+                                         addNewOptions = addNewOptions
                                        });
   }
 
@@ -201,7 +212,9 @@ public static partial class Extensions {
      object htmlAttributes,
      HtmlListInfo wrapInfo,
      string[] disabledValues,
-     Expression<Func<TItem, object>> htmlAttributesExpr) {
+     Expression<Func<TItem, object>> htmlAttributesExpr,
+      AddNewOptions addNewOptions)
+  {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -216,7 +229,8 @@ public static partial class Extensions {
                                          selectedValuesExpr = selectedValuesExpr,
                                          htmlAttributes = htmlAttributes,
                                          htmlListInfo = wrapInfo,
-                                         disabledValues = disabledValues
+                                         disabledValues = disabledValues,
+                                         addNewOptions = addNewOptions
                                        });
   }
   /// <summary>
@@ -248,7 +262,9 @@ public static partial class Extensions {
      object htmlAttributes,
      HtmlListInfo wrapInfo,
      string[] disabledValues,
-     Expression<Func<TItem, object>> htmlAttributesExpr) {
+     Expression<Func<TItem, object>> htmlAttributesExpr,
+      AddNewOptions addNewOptions)
+  {
     var modelMetadata = ModelMetadata.FromLambdaExpression(listNameExpr, htmlHelper.ViewData);
     return _listBuilder.CheckBoxList
       (new listConstructor
@@ -263,7 +279,8 @@ public static partial class Extensions {
                                          selectedValueExpr = selectedValueExpr,
                                          htmlAttributes = htmlAttributes,
                                          htmlListInfo = wrapInfo,
-                                         disabledValues = disabledValues
+                                         disabledValues = disabledValues,
+                                         addNewOptions = addNewOptions
                                        });
   }
 }

@@ -70,6 +70,7 @@
     <Compile Include="Internal\Helpers\toProperty.cs" />
     <Compile Include="Internal\Model\htmlElementTag.cs" />
     <Compile Include="Internal\Model\listConstructor.cs" />
+    <Compile Include="Model\AddNewOptions.cs" />
     <Compile Include="Model\HtmlListInfo.cs" />
     <Compile Include="Model\HtmlTag.cs" />
     <Compile Include="Internal\Model\htmlWrapperInfo.cs" />

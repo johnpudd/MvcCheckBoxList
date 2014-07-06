@@ -37,6 +37,7 @@ namespace MvcCheckBoxList.Library {
          lc.htmlAttributes,
          lc.htmlListInfo,
          lc.disabledValues,
+         lc.addNewOptions,
          lc.position);
     }
 
@@ -74,6 +75,7 @@ namespace MvcCheckBoxList.Library {
        object htmlAttributes,
        HtmlListInfo htmlListInfo,
        string[] disabledValues,
+       AddNewOptions addNewOptions,
        Position position = Position.Horizontal) {
 
       // ----------------------------------------------------------------------
@@ -117,7 +119,7 @@ namespace MvcCheckBoxList.Library {
 
       // set up table/list html wrapper, if applicable
       var numberOfItems = sourceData.Count;
-      var htmlWrapper = _createHtmlWrapper(htmlListInfo, numberOfItems, position, textLayout);
+      var htmlWrapper = _createHtmlWrapper(htmlListInfo, numberOfItems, position, textLayout, "CityListContainer");
 
       // create checkbox list
       var sb = new StringBuilder();
@@ -164,6 +166,14 @@ namespace MvcCheckBoxList.Library {
       }
       sb.Append(htmlWrapper.wrap_close);
 
+
+      if (addNewOptions.Enable)
+      {
+          var newInputHtmlFieldName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(listName);
+          var newInputHtmlFieldId = newInputHtmlFieldName.Replace(".", "_") + "_x";
+          sb.Append("<div><input type='text' id='new_" + listName.Replace(".", "__") + "_item' /><a href='#' onclick =\"try{addNewRelated('CityListContainer', 'new_" + listName.Replace(".", "__") + "_item', '" + addNewOptions.ApiPostUrl + "', '" + newInputHtmlFieldName + "', '" + newInputHtmlFieldId + "');}catch(e){alert(e);};return false;\">Add New " + addNewOptions.Name + "</a></div>");
+      }
+
       // return checkbox list
       return MvcHtmlString.Create(sb.ToString());
     }
@@ -177,7 +187,8 @@ namespace MvcCheckBoxList.Library {
     /// <param name="textLayout">Sets layout of a checkbox for right-to-left languages</param>
     /// <returns>HTML wrapper information</returns>
     private htmlWrapperInfo _createHtmlWrapper
-      (HtmlListInfo wrapInfo, int numberOfItems, Position position, TextLayout textLayout) {
+      (HtmlListInfo wrapInfo, int numberOfItems, Position position, TextLayout textLayout, string containerId)
+    {
       var w = new htmlWrapperInfo();
 
       if (wrapInfo != null) {
@@ -260,6 +271,9 @@ namespace MvcCheckBoxList.Library {
           w.wrap_close = "</" + wrapRow + ">";
         }
       }
+
+      w.wrap_open = "<div id='" + containerId + "'>" + w.wrap_open;
+      w.wrap_close = w.wrap_close + "</div>";
 
       // return completed check box list wrapper
       return w;

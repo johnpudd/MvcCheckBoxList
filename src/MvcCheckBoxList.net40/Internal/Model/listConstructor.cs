@@ -17,6 +17,7 @@ namespace MvcCheckBoxList.Library {
     public object htmlAttributes { get; set; }
     public HtmlListInfo htmlListInfo { get; set; }
     public string[] disabledValues { get; set; }
-    public Position position { get; set; }
+    public Position position { get; set; } 
+    public AddNewOptions addNewOptions { get; set; }
   }
 }
